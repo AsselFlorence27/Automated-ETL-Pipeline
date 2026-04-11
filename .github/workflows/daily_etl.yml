@@ -24,8 +24,15 @@ jobs:
       - name: Install requirements
         run: pip install -r requirements.txt
 
+      - name: Run Unit Tests
+        env:
+          PYTHONPATH: .
+        run: pytest tests/
+
       - name: Run ETL Pipeline
-        run: python etl_pipeline.py
+        env:
+          PYTHONPATH: .
+        run: python -m src.main
 
       - name: Commit database changes
         run: |
